@@ -5,6 +5,7 @@ import { t } from '../../locales/index.js';
 import { ROLE_AI, ROLE_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import {
+  
   COMMAND_BOT_CONTINUE,
   COMMAND_BOT_FORGET,
   COMMAND_BOT_TALK,
