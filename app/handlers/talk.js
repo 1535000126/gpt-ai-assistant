@@ -37,7 +37,12 @@ const exec = (context) => check(context) && (
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
       const actions = isFinishReasonStop ? [COMMAND_BOT_FORGET] : [COMMAND_BOT_CONTINUE];
-      context.pushText(text, actions);
+      const chunks = text.match(/[\s\S]{1,1000}/g) || [];
+      if (chunks[0]) {
+        await context.pushText(chunks[0], actions);
+      }
+for (let i = 1; i < chunks.length; i++) {
+  await context.pushText(chunks[i], []);
     } catch (err) {
       context.pushError(err);
     }
